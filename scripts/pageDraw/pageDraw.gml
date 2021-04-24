@@ -98,7 +98,7 @@ function pageDraw(p){
 		case 6:
 			draw_set_font(font_text);
 			draw_set_colour(c_grey);
-			draw_text(56, 54 + pp, "Some pages have\nspecial words.");
+			draw_text(56, 54 + pp, "Some words have a\nspecial meaning.");
 			
 			if global.flags[4] == 0 {
 				obj_book_stage.generatePage(4, 16, 1);

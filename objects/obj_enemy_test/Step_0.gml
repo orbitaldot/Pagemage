@@ -20,13 +20,13 @@ if obj_player.y < y {
 		vel[1] += acc;	
 	}
 }
-if bbox_left + vel[0] > 0 && bbox_right + vel[0] < 100 && !instance_place(x + vel[0], y, obj_enemy_test) {
+if bbox_left + sign(vel[0])*mxspd > 0 && bbox_right + sign(vel[0])*mxspd < 100 && !instance_place(x + vel[0], y, obj_enemy_test) {
 	x += vel[0];	
 }else{
 	vel[0] *= -.5;	
 }
 
-if bbox_top + vel[1] > 0 && bbox_bottom + vel[1] < 125 && !instance_place(x, y + vel[1], obj_enemy_test) {
+if bbox_top + sign(vel[1])*mxsp > 0 && bbox_bottom + sign(vel[1])*mxspd < 125 && !instance_place(x, y + vel[1], obj_enemy_test) {
 	y += vel[1];	
 }else{
 	vel[1] *= -.5;	

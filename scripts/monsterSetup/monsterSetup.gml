@@ -10,7 +10,7 @@ function monsterSetup(p) {
 		}
 	}
 	
-	if p == 13 {
+	if p == 23 {
 		instance_create_depth(90, 125/2, -100, obj_enemy_chainer);	
 	}
 }
