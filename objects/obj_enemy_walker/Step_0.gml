@@ -2,16 +2,16 @@ event_inherited();
 
 var acc = .06;
 	
-vel[0] = lerp(vel[0], (mxspd * sign(obj_player.x - x) + random_range(-1, 1)) * (sprite_index == spr_enemy_walker), acc);
-vel[1] = lerp(vel[1], mxspd * (sign(obj_player.y - y) + random_range(-1, 1)) * (sprite_index == spr_enemy_walker), acc);
+vel[0] = lerp(vel[0], (mxspd * sign(obj_player.x - x) + random_range(-.5, .5)) * (sprite_index == spr_enemy_walker), acc);
+vel[1] = lerp(vel[1], mxspd * (sign(obj_player.y - y) + random_range(-.5, .5)) * (sprite_index == spr_enemy_walker), acc);
 
 
-if bbox_left + vel[0] > 0 && bbox_right + vel[0] < 100 && !instance_place(x + vel[0], y, obj_enemy_walker) {
+if bbox_left + sign(vel[0])*mxspd*2 > 0 && bbox_right + sign(vel[0])*mxspd*2 < 100 && !place_meeting(x + sign(vel[0])*mxspd*2, y, obj_enemy_walker) {
 	x += vel[0];	
 }	
 
 
-if bbox_top + vel[1] > 0 && bbox_bottom + vel[1] < 125 && !instance_place(x, y + vel[1], obj_enemy_walker) {
+if bbox_top + sign(vel[1])*mxspd*2 > 0 && bbox_bottom + sign(vel[1])*mxspd*2 < 125 && !place_meeting(x, y + sign(vel[1]) * mxspd*2, obj_enemy_walker) {
 	y += vel[1];	
 }
 

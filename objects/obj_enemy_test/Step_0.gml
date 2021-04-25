@@ -36,8 +36,8 @@ if bbox_top + sign(vel[1])*mxspd*2 > 0 && bbox_bottom + sign(vel[1])*mxspd*2 < 1
 var walker = instance_place(x, y, obj_enemy_walker);
 if walker != noone {
 	var d = irandom_range(0, 360);
-	walker.vel[0] = lengthdir_x(4, d);	
-	walker.vel[1] = lengthdir_y(4, d);
+	walker.vel[0] = lengthdir_x(3, d);	
+	walker.vel[1] = lengthdir_y(3, d);
 	walker.sprite_index = spr_enemy_walker_hey;
 	walker.alarm[0] = 60;
 }

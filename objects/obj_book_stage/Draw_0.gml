@@ -25,7 +25,7 @@ if page == 0 {
 
 
 // page number
-if page > 0 {
+if page > 0 && global.chapter != 999 {
 	draw_set_alpha(1);
 	draw_set_font(font_tnr);
 	draw_set_colour(c_black);
@@ -35,6 +35,8 @@ if page > 0 {
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);
 }
+
+pageDraw(page);
 
 	// SURFACE
 if cover_open && !page_blank {
@@ -63,7 +65,7 @@ if page > 0 {
 		if page/3 > 50 {
 			c = page mod 10;
 		}
-		draw_sprite_ext(spr_pagesides, 0, 50, 125 + min(page/3, 45) + pp + c, -1, 1, 0, c_white, 1);
+		draw_sprite_ext(spr_pagesides, 0, 50, 125 + min(page/3, 30) + pp + c, -1, 1, 0, c_white, 1);
 	}	
 	
 	if page > 2 || pageflip >= pageflip_duration && page != 1 {
@@ -101,8 +103,6 @@ if page > 0 {
 		pageflip = lerp(pageflip, pageflip_duration, .1);
 	}	
 }
-
-pageDraw(page);
 
 //monster hp
 if instance_exists(obj_monster) {

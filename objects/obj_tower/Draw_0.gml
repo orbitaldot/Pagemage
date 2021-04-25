@@ -5,3 +5,5 @@ if instance_exists(obj_book_stage) {
 		surface_reset_target();
 	}
 }
+
+global.tower = 0;	

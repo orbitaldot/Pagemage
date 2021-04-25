@@ -1,8 +1,8 @@
 function monsterSetup(p) {
 	static lastMonster = -1;
-	static monsterProbabilityDefault = .3;
+	static monsterProbabilityDefault = .4;
 	static monsterProbability = 0;
-	static monsterProbabilityIncrease = .1;
+	static monsterProbabilityIncrease = .125;
 	
 	if global.tower { return };
 	
@@ -17,9 +17,13 @@ function monsterSetup(p) {
 			if global.chapter == 1 {
 				if p < 20 {
 					monstergroup = irandom_range(0, 2);
-				}else{
+				}else if p < 30 {
 					monstergroup = irandom_range(1, 7);	
+				}else{
+					monstergroup = irandom_range(2, 9);	
 				}
+			} else if global.chapter == 2 {
+				monstergroup = irandom_range(50, 51);	
 			}
 		}
 		lastMonster = monstergroup;
@@ -59,7 +63,19 @@ function monsterSetup(p) {
 			instance_create_depth(60, 30, -100, obj_enemy_walker);
 			instance_create_depth(80, 125/2, -100, obj_enemy_test);
 			instance_create_depth(60, 95, -100, obj_enemy_walker);
+		}else if monstergroup == 8 {
+			instance_create_depth(70, 125/2, -100, obj_enemy_shooter);
+		}else if monstergroup == 9 {
+			instance_create_depth(70, 125/2, -100, obj_enemy_shooter);
 		}
+		
+		else if monstergroup == 50 {
+			instance_create_depth(90, 125/2, -100, obj_enemy_chainer);	
+		}else if monstergroup == 51 {
+			instance_create_depth(90, 115, -100, obj_enemy_chainer);
+			instance_create_depth(80, 30, -100, obj_enemy_test);
+		}
+		
 		
 		monsterProbability = monsterProbabilityDefault;
 	}

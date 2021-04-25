@@ -1,6 +1,10 @@
 function pageDraw(p){
 	var pp = obj_book_stage.pp;
 	
+	if global.chapter == 999 {
+		return;	
+	}
+	
 	switch(p) {
 		// Cover
 		case 0:	

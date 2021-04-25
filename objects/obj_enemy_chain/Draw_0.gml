@@ -4,7 +4,7 @@ if instance_exists(obj_book_stage) {
 
 			draw_set_halign(fa_center);
 			draw_set_valign(fa_center);
-
+			draw_set_colour(c_black);
 			draw_set_font(font_small);
 
 			draw_text_transformed(x, y, ltr, 1, 1, image_angle);

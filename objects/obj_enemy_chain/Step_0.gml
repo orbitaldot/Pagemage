@@ -8,3 +8,7 @@ if instance_exists(creator) {
 }
 
 hurtPlayer();
+
+if global.chapter == 999 {
+	instance_destroy(id);	
+}

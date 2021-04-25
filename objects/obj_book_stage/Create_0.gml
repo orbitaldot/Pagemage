@@ -12,6 +12,9 @@ room_all_mons_dead = 1;
 
 page_blank = 0;
 
+game_over_timer = 0;
+dead = 0;
+
 function flipPage() {
 	pageflip = 0;
 	page++;
@@ -35,19 +38,21 @@ function flipPage() {
 		instance_destroy(obj_deco);	
 	}
 	
-	if page > 60 {
-		if page mod 20 == 0 {
+	if page >= 30 && global.chapter == 1 {
+		if (page - 10) mod 20 == 0 {
 			global.tower = 1;	
 		}
+	} else {
+		global.tower = 0;	
 	}
 	
 	pageDeco(global.chapter);
 	
-	if global.chapter > 0 && !global.tower {
+	if global.chapter > 0 && !global.tower && global.chapter != 999 {
 		generatePage(3, 16, 0);	
 	}
 	
-	if global.spawn_monsters {
+	if global.spawn_monsters && page mod 5 > 0 {
 		monsterSetup(page);
 		//monster mhp
 		checkMonsterMHP();
@@ -82,8 +87,8 @@ function  generatePage(n, ml, spcl) {
 	var spcl_word = 0;
 	
 	// special world
-	if global.spawn_monsters {
-		spcl = (random(100) > 90) * choose(1, 1, 3, 3, 2);	
+	if global.spawn_monsters && page mod 5 == 0 {
+		spcl = choose(1, 1, 3, 3, 2);	
 		
 		if spcl == 1 {
 			if global.hp == global.mhp {
@@ -101,8 +106,14 @@ function  generatePage(n, ml, spcl) {
 	if spcl > 0 {
 		var spcl_word = (2 + irandom_range(0, 2))*abs(irandom_range(n, ml));
 		
+		// force health upgrade only in tutorial
 		if global.chapter == 0 {
 			spcl = 1;	
+		}
+		
+		// no upgrades in world 2
+		if global.chapter == 2 {
+			spcl = 0;	
 		}
 	}
 	
@@ -111,7 +122,7 @@ function  generatePage(n, ml, spcl) {
 		while line_x < 80 {
 			var word = instance_create_depth(line_x, line*6 +  4, -10, obj_word);
 			
-			if i >= spcl_word && spcl  > 0 {
+			if i >= spcl_word && spcl  > 0 && line_x > 40 && line_x < 50 {
 				switch(spcl){
 					case 1:
 						word.str = "HEAL    ";
