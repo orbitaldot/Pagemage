@@ -9,8 +9,8 @@ var mon = instance_place(x, y, obj_monster);
 
 if mon != noone {
 	mon.hit = 1;
-	mon.vel[0] += vel[0] / 20;
-	mon.vel[1] += vel[1] / 20;
+	mon.vel[0] += vel[0] / 25;
+	mon.vel[1] += vel[1] / 25;
 	mon.hp -= atk;
 	instance_destroy(id);
 }

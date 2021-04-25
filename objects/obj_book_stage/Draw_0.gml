@@ -1,5 +1,10 @@
-p = max(abs(pageflip_duration/2 - pageflip)/(pageflip_duration/2), .5);
-pp = - p * 4;
+if pageflip < pageflip_duration {
+	p = max(abs(pageflip_duration/2 - pageflip)/(pageflip_duration/2), .5);
+	pp = - p * 4;
+} else {
+	pp = lerp(pp, -4, .2);	
+}
+
 
 // cover
 // draw_set_colour(make_colour_rgb(150, 20, 20));
@@ -14,7 +19,7 @@ draw_set_colour(c_white);
 if page == 0 {
 	draw_sprite(spr_cover, 0, 50, 50 + pp);
 }else{
-	draw_sprite(spr_page, 0, 50, 50 + pp);
+	draw_sprite((room_all_mons_dead ? spr_page : spr_page_blocked), 0, 50, 50 + pp);
 }
 
 
@@ -32,7 +37,7 @@ if page > 0 {
 }
 
 	// SURFACE
-if cover_open {
+if cover_open && !page_blank {
 	if !surface_exists(stage_surface) {
 		stage_surface = surface_create(100, 125);	
 	}else{

@@ -1,15 +1,15 @@
 {
   "spriteId": {
-    "name": "spr_enemy_walker",
-    "path": "sprites/spr_enemy_walker/spr_enemy_walker.yy",
+    "name": "spr_pix",
+    "path": "sprites/spr_pix/spr_pix.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "obj_monster",
-    "path": "objects/obj_monster/obj_monster.yy",
+    "name": "obj_deco",
+    "path": "objects/obj_deco/obj_deco.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -24,9 +24,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":2,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -35,7 +33,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_enemy_walker",
+  "name": "obj_coll",
   "tags": [],
   "resourceType": "GMObject",
 }

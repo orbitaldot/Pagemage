@@ -1,5 +1,3 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function pageDraw(p){
 	var pp = obj_book_stage.pp;
 	
@@ -59,6 +57,7 @@ function pageDraw(p){
 				
 				with(obj_book_stage) {
 					checkMonsterMHP();	
+					room_all_mons_dead = 0;
 				}
 				
 				global.flags[2] = 1;
@@ -89,6 +88,7 @@ function pageDraw(p){
 				
 				with(obj_book_stage) {
 					checkMonsterMHP();	
+					room_all_mons_dead = 0;
 				}
 				
 				global.flags[3] = 1;	

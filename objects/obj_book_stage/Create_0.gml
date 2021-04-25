@@ -8,11 +8,16 @@ stage_surface = surface_create(100, 125);
 cover_open = 0;
 
 room_mon_mhp = 0;
+room_all_mons_dead = 1;
+
+page_blank = 0;
 
 function flipPage() {
 	pageflip = 0;
 	page++;
 	room_mon_mhp = 0;
+	room_all_mons_dead = 1;
+	alarm[0] = 2;
 	
 	if instance_exists(obj_word) {
 		instance_destroy(obj_word);	
@@ -30,18 +35,23 @@ function flipPage() {
 		instance_destroy(obj_deco);	
 	}
 	
+	if page > 60 {
+		if page mod 20 == 0 {
+			global.tower = 1;	
+		}
+	}
+	
 	pageDeco(global.chapter);
 	
-	if global.chapter > 0 {
+	if global.chapter > 0 && !global.tower {
 		generatePage(3, 16, 0);	
 	}
 	
 	if global.spawn_monsters {
 		monsterSetup(page);
+		//monster mhp
+		checkMonsterMHP();
 	}
-	
-	//monster mhp
-	checkMonsterMHP();
 	
 	var sfx = audio_play_sound(sfx_pageflip, 0, 0);
 	audio_sound_pitch(sfx, random_range(.9, 1));
@@ -71,12 +81,29 @@ function  generatePage(n, ml, spcl) {
 	var line_x = 20;
 	var spcl_word = 0;
 	
+	// special world
 	if global.spawn_monsters {
-		spcl = (random(100) > 90) * 1;	
+		spcl = (random(100) > 90) * choose(1, 1, 3, 3, 2);	
+		
+		if spcl == 1 {
+			if global.hp == global.mhp {
+				spcl = 2;	
+			}
+		}
+		
+		if spcl == 2 {
+			if global.mhp > 9 {
+				spcl = 3;	
+			}
+		}
 	}
 	
 	if spcl > 0 {
-		var spcl_word = irandom_range(10, 30);
+		var spcl_word = (2 + irandom_range(0, 2))*abs(irandom_range(n, ml));
+		
+		if global.chapter == 0 {
+			spcl = 1;	
+		}
 	}
 	
 	var i = 0;
@@ -84,13 +111,22 @@ function  generatePage(n, ml, spcl) {
 		while line_x < 80 {
 			var word = instance_create_depth(line_x, line*6 +  4, -10, obj_word);
 			
-			if i == spcl_word && spcl  > 0 {
+			if i >= spcl_word && spcl  > 0 {
 				switch(spcl){
 					case 1:
-						word.str = "HEAL  ";
+						word.str = "HEAL    ";
 						word.special = 1;
 						break;
+					case 2:
+						word.str = "HEART     ";
+						word.special = 2;
+						break;
+					case 3:
+						word.str = "BULLET    ";
+						word.special = 3;
+						break;
 				}
+				spcl_word =  999999;
 			}
 			
 			line_x += string_width(word.str);
@@ -101,7 +137,7 @@ function  generatePage(n, ml, spcl) {
 			
 			i++;
 		}
-		line ++;
+		line++;
 		
 		if irandom(3) == 1 {
 			line++;	
@@ -110,3 +146,5 @@ function  generatePage(n, ml, spcl) {
 		line_x = 20;
 	}	
 }
+
+multiflip = 0;

@@ -5,3 +5,8 @@ if !cover_open {
 		cover_open = 1;
 	}
 }
+
+if !room_all_mons_dead && !instance_exists(obj_monster) {
+	pp = -2;
+	room_all_mons_dead = 1;
+}
