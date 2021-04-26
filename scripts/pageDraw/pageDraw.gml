@@ -26,8 +26,10 @@ function pageDraw(p){
 			draw_set_font(font_text);
 			draw_set_halign(fa_center);
 			draw_set_colour(c_grey);
-			draw_text_transformed(100, 70 + pp, "PROLOGUE", 2, 2, 0);
-			draw_text(100, 90 + pp, "- The tutorial -");
+			if !global.did_tutorial {
+				draw_text_transformed(100, 70 + pp, "PROLOGUE", 2, 2, 0);
+				draw_text(100, 90 + pp, "- The tutorial -");
+			}
 			draw_set_halign(fa_left);
 			draw_text(60, 150 + pp, "Walk right to \ncontinue ->");
 			break;
