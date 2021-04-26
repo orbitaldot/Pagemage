@@ -21,10 +21,17 @@ if global.chapter != 999 && global.hp <= 0 {
 		instance_destroy(obj_deco);	
 	}
 	
+	global.dead = 1;
+	
 	game_over_timer ++;
+	
+	if game_over_timer == 1 {
+		music(-1);	
+	}
 	
 	// enter the tower
 	if game_over_timer > 40 {
+		
 		global.chapter = 999;
 	
 		obj_book_stage.multiflip = 20;
@@ -32,7 +39,12 @@ if global.chapter != 999 && global.hp <= 0 {
 	}
 }
 
+
 if dead && pageflip >= pageflip_duration - 2 {
+	if died_alpha < 1 {
+		died_alpha += .08;	
+	}
+	
 	if keyboard_check_pressed(ord("X")) {
 		pageflip = pageflip_duration;
 		
@@ -41,6 +53,10 @@ if dead && pageflip >= pageflip_duration - 2 {
 		pp = 4;
 		cover_open = 0;
 		game_over_timer = 0;
+		died_alpha = 0;
+		run_pages = -1;
+		
+		global.dead = 0;
 		global.chapter = 0;
 		global.hp = 3;
 		global.mhp = 3;

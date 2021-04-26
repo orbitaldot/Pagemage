@@ -1,9 +1,14 @@
 event_inherited();
 
-tick++;
+if !zzz {
+	tick++;
+	sprite_index = spr_enemy_shooter;
+}else{
+	sprite_index = spr_enemy_shooter_zzz;	
+}
 
-if tick mod 100 < 60 {
-	if tick mod 10 == 0 {
+if tick mod 120 > (60) {
+	if tick mod (10) == 0 {
 		var d = (tick) mod 360;
 		
 		var b1 = instance_create_depth(x, y, depth + 1, obj_bul);

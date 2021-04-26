@@ -8,6 +8,8 @@ function pageDraw(p){
 	switch(p) {
 		// Cover
 		case 0:	
+			draw_sprite(spr_pagemage, 0, 50, 50 + pp);
+			
 			draw_set_halign(fa_center);
 			draw_set_font(font_tnr);
 			
@@ -113,7 +115,10 @@ function pageDraw(p){
 		case 7:
 			draw_set_font(font_text);
 			draw_set_colour(c_grey);
-			draw_text(56, 54 + pp, "How far can\nyou get?");
+			draw_text(56, 54 + pp, "You will come\nacross a\nchallening tower.\n\n\n\n\n\n\n\n\n\nReady yourself\nbefore entering.");
+			
+			draw_sprite(spr_tower_page, 0, 50, 50 + obj_book_stage.pp);
+			
 			break;
 			
 		case 8:
@@ -123,9 +128,16 @@ function pageDraw(p){
 			draw_set_font(font_text);
 			draw_set_halign(fa_center);
 			draw_set_colour(c_grey);
-			draw_text_transformed(100, 70 + pp, "CHAPTER 1", 2, 2, 0);
-			draw_text(100, 90 + pp, "-");
+			draw_text_transformed(100, 70 + pp, "FIELD", 2, 2, 0);
+			draw_text(100, 90 + pp, "");
 			draw_set_halign(fa_left);
+			
+			global.did_tutorial = 1;
+			
+			if global.flags[10] == 0 {
+				pageDeco(1);
+				global.flags[10] = 1;	
+			}
 			
 			break;
 			

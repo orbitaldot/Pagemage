@@ -3,8 +3,8 @@ mxspd = .8;
 
 
 
-hp = 50;
-mhp = 50;
+hp = 40;
+mhp = 40;
 hit = 0;
 
 comfortable = 1;

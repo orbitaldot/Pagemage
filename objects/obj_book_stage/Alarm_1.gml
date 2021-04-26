@@ -6,6 +6,7 @@ if multiflip > 0 {
 	
 	if instance_exists(obj_player){
 		obj_player.x = 20;
+		obj_player.y = 125/2;
 	}
 	
 	global.spawn_monsters = 0;
@@ -17,6 +18,8 @@ if multiflip > 0 {
 	
 	if global.chapter == 999 {
 		dead = 1;	
+	} else if global.chapter == 2 {
+		alarm[2] = 30;	
 	}
 }
 

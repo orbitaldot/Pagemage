@@ -1,4 +1,4 @@
-window_set_caption(fps);
+window_set_caption("PAGEMAGE - by orbitaldot for Ludum Dare 48.");
 
 if debug_mode {
 	if keyboard_check_pressed(ord("O")){
@@ -6,4 +6,8 @@ if debug_mode {
 			instance_destroy(obj_monster);	
 		}
 	}
+}
+
+if keyboard_check_pressed(ord("F")) {
+	screen_save(string(current_time) + ".png");	
 }

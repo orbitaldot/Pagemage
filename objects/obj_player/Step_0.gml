@@ -6,16 +6,20 @@ var d = keyboard_check(vk_down)
 vel[0] = mxspd * (r - l);
 vel[1] = mxspd * (d - u);
 
-x += vel[0] * (bbox_left + vel[0] > 0) * ((bbox_right + vel[0] < 100 && instance_exists(obj_monster)) || !instance_exists(obj_monster)) * !instance_place(x + vel[0], y, obj_coll);
-y += vel[1] * (bbox_top + vel[1] > 0) * (bbox_bottom + vel[1] < 125) * !instance_place(x, y + vel[1], obj_coll);
+if !global.dead {
+	x += vel[0] * (bbox_left + vel[0] > 0) * ((bbox_right + vel[0] < 100 && instance_exists(obj_monster)) || !instance_exists(obj_monster)) * !instance_place(x + vel[0], y, obj_coll);
+	y += vel[1] * (bbox_top + vel[1] > 0) * (bbox_bottom + vel[1] < 125) * !instance_place(x, y + vel[1], obj_coll);
+}
 
-
-
-if u { facing = 0; facing_y = -1};
-else if d { facing = 0; facing_y = 1};
+if u { facing = 0; facing_y = -1 sprite_index = spr_p_u};
+else if d { facing = 0; facing_y = 1 sprite_index = spr_p_d};
 
 if r { facing = 1; facing_y = 0};
 else if l { facing = -1; facing_y = 0};
+
+if facing_y == 0 {
+	sprite_index = spr_p;	
+}
 
 if abs(vel[0]) + abs(vel[1]) > 0 {
 	image_speed = 1;

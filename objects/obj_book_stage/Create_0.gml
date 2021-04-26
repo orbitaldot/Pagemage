@@ -15,12 +15,25 @@ page_blank = 0;
 game_over_timer = 0;
 dead = 0;
 
+run_pages = -1;
+
 function flipPage() {
 	pageflip = 0;
 	page++;
+	if multiflip == 0 {
+		run_pages++;
+	}
 	room_mon_mhp = 0;
 	room_all_mons_dead = 1;
 	alarm[0] = 2;
+	
+	if page == 9 && global.did_tutorial {
+		music(1);	
+	}
+	
+	if global.did_tutorial && page < 8 && page >= 2 {
+		page = 8;	
+	}
 	
 	if instance_exists(obj_word) {
 		instance_destroy(obj_word);	
@@ -88,7 +101,7 @@ function  generatePage(n, ml, spcl) {
 	
 	// special world
 	if global.spawn_monsters && page mod 5 == 0 {
-		spcl = choose(1, 1, 3, 3, 2);	
+		spcl = choose(1, 1, 1, 3, 3, 3, 3, 2, 2);	
 		
 		if spcl == 1 {
 			if global.hp == global.mhp {
@@ -137,6 +150,8 @@ function  generatePage(n, ml, spcl) {
 						word.special = 3;
 						break;
 				}
+				
+				word.depth = -300;
 				spcl_word =  999999;
 			}
 			
@@ -159,3 +174,4 @@ function  generatePage(n, ml, spcl) {
 }
 
 multiflip = 0;
+died_alpha = 0;

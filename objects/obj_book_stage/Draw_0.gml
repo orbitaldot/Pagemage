@@ -5,6 +5,11 @@ if pageflip < pageflip_duration {
 	pp = lerp(pp, -4, .2);	
 }
 
+if !cover_open {
+	draw_set_font(font_text);
+	draw_text_transformed(0, 174, "For LD48\nby", 1, 1, 0);
+	draw_text_transformed(0, 190, "Orbitaldot", .95, .95, 0);
+}
 
 // cover
 // draw_set_colour(make_colour_rgb(150, 20, 20));
@@ -25,29 +30,38 @@ if page == 0 {
 
 
 // page number
-if page > 0 && global.chapter != 999 {
+if page > 0 && global.chapter != 999 && multiflip == 0 {
+	page_num = page;
+	
+	if global.chapter == 2 {
+		page_num = "XX" + string(max(0, page - 10020));	
+	}
+	
+	
 	draw_set_alpha(1);
 	draw_set_font(font_tnr);
 	draw_set_colour(c_black);
 	draw_set_halign(fa_right);
 	draw_set_valign(fa_bottom);
-	draw_text(150, 175 + pp, page);
+	draw_text(150, 175 + pp, page_num);
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);
 }
 
 pageDraw(page);
 
-	// SURFACE
-if cover_open && !page_blank {
-	if !surface_exists(stage_surface) {
-		stage_surface = surface_create(100, 125);	
-	}else{
-		draw_surface(stage_surface, 50, 50 + pp);	
+// SURFACE
+if global.chapter != 999 {
+	if cover_open && !page_blank {
+		if !surface_exists(stage_surface) {
+			stage_surface = surface_create(100, 125);	
+		}else{
+			draw_surface(stage_surface, 50, 50 + pp);	
 	
-		surface_set_target(stage_surface);
-		draw_clear_alpha(c_white, 0);
-		surface_reset_target();
+			surface_set_target(stage_surface);
+			draw_clear_alpha(c_white, 0);
+			surface_reset_target();
+		}
 	}
 }
 
@@ -139,3 +153,23 @@ draw_set_halign(fa_right);
 draw_text(150, 36, string(global.bullets) + "/" + string(global.bullet_cap));
 
 draw_set_halign(fa_left);
+
+if dead {
+	draw_set_alpha(died_alpha);
+	
+	draw_set_font(font_tnr);
+	draw_set_halign(fa_center);
+	draw_set_colour(c_black);
+	draw_sprite(spr_rip, 0, 50, 50);
+	
+	draw_text_transformed(100, 134, "Press [X] to\ntry again.", 1, 1, 0);
+	draw_set_halign(fa_left);
+	
+	draw_set_font(font_text);
+	if global.did_tutorial {
+		draw_text(60, 105, "Explored\n" + string(run_pages) + " pages\nin run.");
+	}else{
+		draw_text(60, 105, "Sorry for\ntutorial\ndeath lol");
+	}
+	draw_set_alpha(1);
+}
